@@ -8,8 +8,8 @@ services:
     ports:
       - "5000:5000"
     environment:
-      line_channel_access_token: 'line的token'
-      line_channel_secret: 'line的Channel secret'
+      line_channel_access_token: '${line_channel_access_token}'
+      line_channel_secret: '${line_channel_secret}'
       TZ: 'Asia/Taipei'
     volumes:
       - .:/app
@@ -26,9 +26,9 @@ services:
     ports:
       - "4040:4040"
     environment:
-      NGROK_AUTH: 'ngrok的authtoken'
-      NGROK_USERNAME: 'ngrok的帳號'
-      NGROK_PASSWORD: 'ngrok的密碼'
+      NGROK_AUTH: '${NGROK_AUTH}'
+      NGROK_USERNAME: '${NGROK_USERNAME}'
+      NGROK_PASSWORD: '${NGROK_PASSWORD}'
       NGROK_PORT: flask-chatbot.pri:5000
       NGROK_REGION: 'ap'
       TZ: 'Asia/Taipei'
@@ -46,7 +46,7 @@ services:
       - "3307:3306"
     environment:
       - TZ=Asia/Taipei
-      - MYSQL_ROOT_PASSWORD=iii
+      - MYSQL_ROOT_PASSWORD='${MYSQL_ROOT_PASSWORD}'
     volumes:
       - ./data/mysql_db/mysql_data:/var/lib/mysql
       - ./data/mysql_init:/docker-entrypoint-initdb.d/
@@ -98,7 +98,7 @@ services:
     ports:
       - 6379:6379
     environment:
-      - REDIS_PASSWORD=iii
+      - REDIS_PASSWORD='{REDIS_PASSWORD}'
     volumes:
       - ./data/redis/data:/usr/share/redis/data
     networks:
