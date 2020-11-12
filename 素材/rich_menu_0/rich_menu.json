@@ -1,0 +1,24 @@
+{
+  "size": {
+    "width": 2500,
+    "height": 1686
+  },
+  "selected": true,
+  "name": "註冊選單",
+  "chatBarText": "加入我們",
+  "areas": [
+    {
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 2500,
+        "height": 1686
+      },
+      "action": {
+        "type": "postback",
+        "text": "我要加入會員",
+        "data": "folder=上傳照片"
+      }
+    }
+  ]
+}

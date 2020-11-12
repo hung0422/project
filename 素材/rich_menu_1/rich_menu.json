@@ -1,0 +1,89 @@
+{
+  "size": {
+    "width": 2500,
+    "height": 1686
+  },
+  "selected": true,
+  "name": "主功能選單",
+  "chatBarText": "主功能選單",
+  "areas": [
+    {
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 814,
+        "height": 873
+      },
+      "action": {
+        "type": "postback",
+        "text": "即時購物車",
+        "data": "shopping_cart=123"
+      }
+    },
+    {
+      "bounds": {
+        "x": 814,
+        "y": 0,
+        "width": 915,
+        "height": 868
+      },
+      "action": {
+        "type": "postback",
+        "text": "我想看推薦商品",
+        "data": "recommender=123"
+      }
+    },
+    {
+      "bounds": {
+        "x": 1729,
+        "y": 0,
+        "width": 771,
+        "height": 868
+      },
+      "action": {
+        "type": "postback",
+        "text": "我想看前五筆交易紀錄",
+        "data": "history=123"
+      }
+    },
+    {
+      "bounds": {
+        "x": 1,
+        "y": 869,
+        "width": 820,
+        "height": 817
+      },
+      "action": {
+        "type": "postback",
+        "text": "我有問題!!",
+        "data": "question=123"
+      }
+    },
+    {
+      "bounds": {
+        "x": 818,
+        "y": 869,
+        "width": 915,
+        "height": 817
+      },
+      "action": {
+        "type": "postback",
+        "text": "我想看現在的最新優惠",
+        "data": "folder=最新優惠"
+      }
+    },
+    {
+      "bounds": {
+        "x": 1733,
+        "y": 865,
+        "width": 767,
+        "height": 817
+      },
+      "action": {
+        "type": "postback",
+        "text": "確認我的資料",
+        "data": "information=123"
+      }
+    }
+  ]
+}

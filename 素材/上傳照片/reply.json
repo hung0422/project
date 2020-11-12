@@ -1,0 +1,50 @@
+[
+    {
+  "type": "bubble",
+  "direction": "ltr",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "上傳照片",
+        "weight": "bold",
+        "size": "3xl",
+        "align": "center",
+        "contents": []
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "拍照",
+          "uri": "line://nv/camera/"
+        },
+        "color": "#905C44FF",
+        "style": "primary"
+      },
+      {
+        "type": "separator",
+        "margin": "sm"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "照片上傳",
+          "uri": "line://nv/cameraRoll/single"
+        },
+        "color": "#905C44FF",
+        "style": "primary"
+      }
+    ]
+  }
+}
+    ]

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>會員中心</title>
+</head>
+<body>
+<h1> 會員中心 </h1>
+    <form method='post' action= "{{ url_for('submit') }}">
+    <input type="hidden" name="user_ID" value="{{ ID }}">
+        <div>
+            <label>名字:</label>
+        <input type = 'text'  style="font-size:16px;padding:10px"  name = 'name' placeholder="Ex:王小明" required>
+        </div>
+            <br>
+        <div>
+            <label>性別:<span class = 'r'></span></label>
+            <select  style="font-size:16px;padding:10px"  name = "gender"  >
+                <option value = 'male' >男</option>
+                <option value = 'female' >女</option>
+            </select>
+        </div>
+            <br>
+        <div>
+            <label>地區:<span class = 'r'></span></label>
+            <select  style="font-size:16px;padding:10px"  name = "regionID"  >
+                <option value = '320' >中壢區</option>
+                <option value = '324' >平鎮區</option>
+                <option value = '325' >龍潭區</option>
+                <option value = '326' >楊梅區</option>
+                <option value = '327' >新屋區</option>
+                <option value = '328' >觀音區</option>
+                <option value = '330' >桃園區</option>
+                <option value = '333' >龜山區</option>
+                <option value = '334' >八德區</option>
+                <option value = '335' >大溪區</option>
+                <option value = '336' >復興區</option>
+                <option value = '337' >大園區</option>
+                <option value = '338' >蘆竹區</option>
+            </select>
+        </div>
+            <br>
+        <div>
+            <input type = 'email'  style="font-size:16px;padding:10px"  name = 'email' placeholder="Ex:hello@example.com" required>
+        </div>
+
+        <p><button type = 'submit'>確認送出</button></p>
+    </form>
+</body>
+</html>

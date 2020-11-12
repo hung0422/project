@@ -1,0 +1,109 @@
+version: '2'
+services:
+  flask-chatbot.pri:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: flask-chatbot
+    ports:
+      - "5000:5000"
+    environment:
+      line_channel_access_token: 'line的token'
+      line_channel_secret: 'line的Channel secret'
+      TZ: 'Asia/Taipei'
+    volumes:
+      - .:/app
+    command: python kafka_welcome_linebot.py
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - es7net
+
+  ngrok-temp:
+    image: wernight/ngrok
+    container_name: ngrok
+    ports:
+      - "4040:4040"
+    environment:
+      NGROK_AUTH: 'ngrok的authtoken'
+      NGROK_USERNAME: 'ngrok的帳號'
+      NGROK_PASSWORD: 'ngrok的密碼'
+      NGROK_PORT: flask-chatbot.pri:5000
+      NGROK_REGION: 'ap'
+      TZ: 'Asia/Taipei'
+    depends_on:
+      - flask-chatbot.pri
+    networks:
+      - es7net
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    hostname: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+    environment:
+      - TZ=Asia/Taipei
+      - MYSQL_ROOT_PASSWORD=iii
+    volumes:
+      - ./data/mysql_db/mysql_data:/var/lib/mysql
+      - ./data/mysql_init:/docker-entrypoint-initdb.d/
+    networks:
+      - es7net
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.2.1
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    depends_on:
+      - flask-chatbot.pri
+    networks:
+      - es7net
+
+  kafka:
+    image: confluentinc/cp-kafka:5.2.1
+    hostname: kafka
+    container_name: kafka
+    ports:
+      - '9092:9092'
+      - '29092:29092'
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      ## for local use
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      ## for public use
+      #KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://<host_ip>:9092
+      #advertised.host.name: <host_ip>
+    networks:
+      - es7net
+
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: redis
+    hostname: redis
+    restart: always
+    ports:
+      - 6379:6379
+    environment:
+      - REDIS_PASSWORD=iii
+    volumes:
+      - ./data/redis/data:/usr/share/redis/data
+    networks:
+      - es7net
+networks:
+  es7net:
+
+
